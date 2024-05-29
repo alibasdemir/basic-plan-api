@@ -3,6 +3,8 @@ package database
 import (
 	"fmt"
 	"log"
+	"student-plan/models/plan"
+	"student-plan/models/student"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -18,4 +20,5 @@ func Connect() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 	fmt.Println("Successfully connected to the database!")
+	DB.AutoMigrate(&student.Student{}, &plan.Plan{})
 }
