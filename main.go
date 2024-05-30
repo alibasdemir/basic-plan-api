@@ -23,5 +23,7 @@ func main() {
 	e.POST("/plans", planHandlers.CreatePlan)
 	e.PUT("/plans/:id", planHandlers.UpdatePlan)
 	e.DELETE("/plans/:id", planHandlers.DeletePlan)
+
+	e.GET("/weekly-plans", planHandlers.WeeklyPlan)
 	e.Start(":8080")
 }
