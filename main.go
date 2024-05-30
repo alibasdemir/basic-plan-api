@@ -20,5 +20,6 @@ func main() {
 
 	e.GET("/plans", planHandlers.GetPlan)
 	e.POST("/plans", planHandlers.CreatePlan)
+	e.PUT("/plans/:id", planHandlers.UpdatePlan)
 	e.Start(":8080")
 }
