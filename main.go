@@ -26,5 +26,7 @@ func main() {
 
 	e.GET("/weekly-plans", planHandlers.WeeklyPlan)
 	e.GET("/monthly-plans", planHandlers.MonthlyPlan)
+
+	e.GET("/student-plan/:id", studentHandlers.GetStudentPlan)
 	e.Start(":8080")
 }
