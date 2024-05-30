@@ -25,5 +25,6 @@ func main() {
 	e.DELETE("/plans/:id", planHandlers.DeletePlan)
 
 	e.GET("/weekly-plans", planHandlers.WeeklyPlan)
+	e.GET("/monthly-plans", planHandlers.MonthlyPlan)
 	e.Start(":8080")
 }

@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"gorm.io/gorm"
 )
 
 func WeeklyPlan(c echo.Context) error {
@@ -15,11 +14,13 @@ func WeeklyPlan(c echo.Context) error {
 	endOfWeek := startOfWeek.AddDate(0, 0, 7)
 
 	var weeklyPlans []plan.Plan
-	if err := database.DB.Where("day BETWEEN ? AND ?", startOfWeek, endOfWeek).Find(&weeklyPlans).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return c.JSON(http.StatusNotFound, "No plans found for this week")
-		}
+	result := database.DB.Where("day BETWEEN ? AND ?", startOfWeek, endOfWeek).Find(&weeklyPlans)
+	if result.Error != nil {
 		return c.JSON(http.StatusInternalServerError, "Error fetching weekly plans")
+	}
+
+	if result.RowsAffected == 0 {
+		return c.JSON(http.StatusNotFound, "No plans found for this week")
 	}
 
 	return c.JSON(http.StatusOK, weeklyPlans)
