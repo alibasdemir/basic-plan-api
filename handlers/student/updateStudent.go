@@ -12,7 +12,7 @@ func UpdateStudent(c echo.Context) error {
 	id := c.Param("id")
 	var student student.Student
 	if err := database.DB.First(&student, id).Error; err != nil {
-		return c.JSON(http.StatusNotFound, err)
+		return c.JSON(http.StatusNotFound, "Student not found")
 	}
 	if err := c.Bind(&student); err != nil {
 		return c.JSON(http.StatusBadRequest, err)

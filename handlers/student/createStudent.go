@@ -11,7 +11,7 @@ import (
 func CreateStudent(c echo.Context) error {
 	student := new(student.Student)
 	if err := c.Bind(student); err != nil {
-		return c.JSON(http.StatusBadRequest, err)
+		return c.JSON(http.StatusBadRequest, "Failed to create student")
 	}
 	database.DB.Create(&student)
 	return c.JSON(http.StatusCreated, student)

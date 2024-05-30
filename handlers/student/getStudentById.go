@@ -13,7 +13,7 @@ func GetStudentById(c echo.Context) error {
 
 	var student student.Student
 	if err := database.DB.First(&student, id).Error; err != nil {
-		return c.JSON(http.StatusNotFound, map[string]string{"error": "Student not found"})
+		return c.JSON(http.StatusNotFound, "Student not found")
 	}
 	return c.JSON(http.StatusOK, student)
 }

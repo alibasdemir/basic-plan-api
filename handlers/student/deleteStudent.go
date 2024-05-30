@@ -10,8 +10,13 @@ import (
 
 func DeleteStudent(c echo.Context) error {
 	id := c.Param("id")
-	if err := database.DB.Delete(&student.Student{}, id).Error; err != nil {
-		return c.JSON(http.StatusNotFound, err)
+	var student student.Student
+
+	if err := database.DB.First(&student, id).Error; err != nil {
+		return c.JSON(http.StatusNotFound, "Student not found")
 	}
-	return c.JSON(http.StatusOK, map[string]string{"message": "Student has been deleted"})
+	if err := database.DB.Delete(&student).Error; err != nil {
+		return c.JSON(http.StatusInternalServerError, "Error deleting student")
+	}
+	return c.JSON(http.StatusOK, "Student has been deleted")
 }

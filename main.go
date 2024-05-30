@@ -19,6 +19,7 @@ func main() {
 	e.DELETE("students/:id", studentHandlers.DeleteStudent)
 
 	e.GET("/plans", planHandlers.GetPlan)
+	e.GET("/plans/:id", planHandlers.GetPlanById)
 	e.POST("/plans", planHandlers.CreatePlan)
 	e.PUT("/plans/:id", planHandlers.UpdatePlan)
 	e.Start(":8080")
