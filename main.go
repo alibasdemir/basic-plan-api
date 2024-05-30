@@ -2,6 +2,7 @@ package main
 
 import (
 	database "student-plan/db"
+	planHandlers "student-plan/handlers/plan"
 	studentHandlers "student-plan/handlers/student"
 
 	"github.com/labstack/echo/v4"
@@ -16,5 +17,7 @@ func main() {
 	e.POST("/students", studentHandlers.CreateStudent)
 	e.PUT("/students/:id", studentHandlers.UpdateStudent)
 	e.DELETE("students/:id", studentHandlers.DeleteStudent)
+
+	e.POST("/plans", planHandlers.CreatePlan)
 	e.Start(":8080")
 }
